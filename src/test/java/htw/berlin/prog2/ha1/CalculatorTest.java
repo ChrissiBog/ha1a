@@ -90,5 +90,20 @@ class CalculatorTest {
 
 
     //TODO hier weitere Tests erstellen
+
+    @Test
+    @DisplayName("should correctly calculate percent")
+    void testPercentOperation() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(5);
+        calc.pressDigitKey(0);
+        calc.pressUnaryOperationKey("%");
+
+        String expected = "0.5";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
 }
 
