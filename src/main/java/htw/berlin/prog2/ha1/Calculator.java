@@ -14,6 +14,7 @@ public class Calculator {
 
     private String latestOperation = "";
 
+    private boolean clearPressedOnce = false; //  Neue Ergänzung
     /**
      * @return den aktuellen Bildschirminhalt als String
      */
@@ -44,12 +45,24 @@ public class Calculator {
      * Werte sowie der aktuelle Operationsmodus zurückgesetzt, so dass der Rechner wieder
      * im Ursprungszustand ist.
      */
-    public void pressClearKey() {
+    
+    /**public void pressClearKey() {
         screen = "0";
         latestOperation = "";
         latestValue = 0.0;
+    }*/
+    
+        public void pressClearKey() {
+        if (!clearPressedOnce) {
+            screen = "0";                  // nur den Bildschirm löschen
+            clearPressedOnce = true;       // nur einmal gedrückt
+        } else {
+            screen = "0";                  // sonst kompletter Reset
+            latestOperation = "";
+            latestValue = 0.0;
+            clearPressedOnce = false;      // zurücksetzen
+        }
     }
-
     /**
      * Empfängt den Wert einer gedrückten binären Operationstaste, also eine der vier Operationen
      * Addition, Substraktion, Division, oder Multiplikation, welche zwei Operanden benötigen.
