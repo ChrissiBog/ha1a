@@ -105,5 +105,37 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+
+    @Test
+    @DisplayName("should not reset memory on first clear press")
+    void testClearKeyOnce() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(4);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(5);
+        calc.pressClearKey();
+        calc.pressDigitKey(2);
+        calc.pressEqualsKey();
+
+        String expected = "6";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("should display error when inverting zero")
+    void testInversionOfZero() {
+        Calculator calc = new Calculator();
+    
+        calc.pressDigitKey(0);
+        calc.pressUnaryOperationKey("1/x");
+    
+        String expected = "Error";
+        String actual = calc.readScreen();
+    
+        assertEquals(expected, actual);
+    }
 }
 
